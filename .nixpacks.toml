@@ -16,12 +16,11 @@ nixPkgs = [
   "lapack"      # Fix for SciPy
 ]
 
-
 [phases.build]
 commands = [
-  "python -m venv /app/venv",
-  ". /app/venv/bin/activate",
+  "python -m ensurepip",
   "pip install --upgrade pip setuptools wheel",
   "pip install torch==2.2.2 --index-url https://download.pytorch.org/whl/cpu --no-cache-dir",
   "pip install -r requirements.txt --no-cache-dir --use-pep517"
 ]
+
