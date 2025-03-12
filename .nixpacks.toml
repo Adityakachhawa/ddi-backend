@@ -11,14 +11,16 @@ nixPkgs = [
   "openssl.dev",
   "glibc",
   "stdenv.cc.cc.lib",
-  "linuxHeaders"
+  "linuxHeaders",
+  "blas",       # Fix for SciPy
+  "lapack"      # Fix for SciPy
 ]
+
 
 [phases.build]
 commands = [
-  "python -m venv --copies /opt/venv",
-  ". /opt/venv/bin/activate",
-  "pip install --upgrade pip==23.3.2 setuptools==68.2.2 wheel==0.42.0",
-  "pip install torch==2.2.2 --index-url https://download.pytorch.org/whl/cpu --no-cache-dir",
+  "python -m venv /opt/venv",
+  "source /opt/venv/bin/activate",
+  "pip install --upgrade pip setuptools wheel",
   "pip install -r requirements.txt --no-cache-dir --use-pep517"
 ]
