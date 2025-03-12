@@ -1,9 +1,7 @@
-# .nixpacks.toml
 [phases.setup]
 nixPkgs = [
   "python310",
   "python310Packages.pip",
-  "python310Packages.virtualenv",
   "gcc",
   "zlib.dev",
   "libxml2.dev",
@@ -11,16 +9,12 @@ nixPkgs = [
   "openssl.dev",
   "glibc",
   "stdenv.cc.cc.lib",
-  "linuxHeaders",
-  "blas",       # Fix for SciPy
-  "lapack"      # Fix for SciPy
+  "linuxHeaders"
 ]
 
 [phases.build]
 commands = [
-  "virtualenv /opt/venv",
-  ". /opt/venv/bin/activate",
   "pip install --upgrade pip setuptools wheel",
+  "pip install torch==2.2.2 --index-url https://download.pytorch.org/whl/cpu --no-cache-dir",
   "pip install -r requirements.txt --no-cache-dir --use-pep517"
 ]
-
